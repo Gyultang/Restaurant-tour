@@ -1,6 +1,7 @@
 /* global kakao */
 import Script from "next/script";
 import * as stores from "@/data/store_data.json";
+import { Dispatch, SetStateAction } from "react";
 
 declare global{
   interface window{
@@ -10,7 +11,11 @@ declare global{
 const DEFAULT_LAT = 37.497625203;
 const DEFAULT_LNG = 127.03088379;
 
-export default function Map() {
+interface MapProps{
+  setMap: Dispatch<SetStateAction<any>>
+}
+
+export default function Map({setMap}:MapProps) {
   const loadKakaoMAp=()=>{
     // kakao map 로드
     window.kakao.maps.load(()=> {
@@ -21,7 +26,7 @@ export default function Map() {
       }
       const map = new window.kakao.maps.Map(mapContainer, mapOption)
 
-      
+      setMap(map)
   });
   }
 
