@@ -10,6 +10,7 @@ async function seedData(){
             address: store?.rdn_code_nm,
             lat: store?.y_dnts,
             lng: store?.x_cnts,
+            name: store?.upso_nm,
             category: store?.bizcnd_code_nm,
             StoreType: store?.cob_code_nm,
             foodCertifyName: store?.crtfc_gbn_nm
