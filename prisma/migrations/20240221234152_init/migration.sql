@@ -16,7 +16,7 @@ CREATE TABLE "Store" (
     "lng" TEXT,
     "name" TEXT,
     "category" TEXT,
-    "StoreType" TEXT,
+    "storeType" TEXT,
     "foodCertifyName" TEXT,
 
     CONSTRAINT "Store_pkey" PRIMARY KEY ("id")

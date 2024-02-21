@@ -6,6 +6,6 @@ export interface StoreType{
     lng?:string|null; 
     name?:string|null;
     category?:string|null;
-    StoreType?:string|null;
+    storeType?:string|null;
     foodCertifyName?:string|null;
 }

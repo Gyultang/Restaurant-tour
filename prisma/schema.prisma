@@ -25,6 +25,6 @@ model Store {
   lng     String?  //x_cnts
   name    String?  //upso_nm
   category String? //bizcnd_code_nm
-  StoreType String? //cob_code_nm
+  storeType String? //cob_code_nm
   foodCertifyName String? //crtfc_gbn_nm
 }

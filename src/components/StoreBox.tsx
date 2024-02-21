@@ -29,7 +29,7 @@ export default function StoreBox({store, setStore}:StoreBoxProps){
                             />
                         <div>
                             <div className="font-semibold">{store?.name}</div>
-                            <div className="text-sm">{store?.StoreType}</div>
+                            <div className="text-sm">{store?.storeType}</div>
                         </div>
                     </div>
                 
