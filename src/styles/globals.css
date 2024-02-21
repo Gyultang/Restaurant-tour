@@ -36,7 +36,7 @@
   }
   .navbar--mobile{
     /* h-screen은 높이에 100vh를 준다 */
-    @apply fixed   w-full top-[52px] bg-blue-500 text-white h-screen
+    @apply fixed w-full top-[52px] bg-blue-500 text-white h-screen 
   }
   .navbar__list--item--mobile{
     @apply cursor-pointer 

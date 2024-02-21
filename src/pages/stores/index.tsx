@@ -1,12 +1,24 @@
 import Image from 'next/image'
 import { StoreType } from "@/interface"
+import axios from 'axios'
+import { useQuery } from 'react-query'
+import Loading from '@/components/Loading'
 
-export default function StoreListPage({stores}:{stores:StoreType[]}){
-    console.log(stores)
+export default function StoreListPage(){
+   
+
+    const {isLoading, isError, data:stores} = useQuery('stores', async()=>{
+    const {data} = await axios('/api/stores')
+    return data as StoreType[]
+    })
+
+    if(isError){
+        return <div className='w-full h-screen text-center mx-auto pt-[10%] text-red-500   font-semibold'>다시 시도해주세요</div>
+    }
     return(
         <div className="px-4 md:max-w-5xl mx-auto py-8">
             <ul role="list" className="divide-y divide-gray-100">
-                {stores?.map((store, index)=>{
+                {isLoading?<Loading/>: stores?.map((store, index)=>{
                     <li className="flex justify-between gap-x-6 py-5" key={index}>
                         <div className="flex gap-x-4">
                             <Image src={store?.category ?`/images/markers/${store?.category}.png`:'/images/markers/default.png'} width={48} height={48} alt='아이콘 이미지'/>
@@ -31,10 +43,4 @@ export default function StoreListPage({stores}:{stores:StoreType[]}){
     )
 }
 
-export async function getServerSideProps(){
-    const stores = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`).then((res)=>res.json())
 
-    return{
-        props: {stores},
-    }
-}

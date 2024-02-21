@@ -7,6 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 
 export default function Navbar(){
     const [isOpen,setIsOpen]=useState(false)
+    console.log("m네비",isOpen)
     return(
        <>
          <div className="navbar">
@@ -24,7 +25,7 @@ export default function Navbar(){
                 {isOpen?<IoCloseOutline/>: <IoIosMenu/>}
             </div>
             {/* 모바일 navbar */}
-            {isOpen&&(
+            {isOpen &&(
                 <div className="navbar--mobile">
                     <div className="navbar__list--mobile">
                         <Link href="/stores" className="navbar__list--item--mobile">맛집 목록</Link>
