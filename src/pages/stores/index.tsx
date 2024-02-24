@@ -20,7 +20,7 @@ export default function StoreListPage(){
     console.log(isPageEnd)
 
     const fetchStores = async({pageParam = 1 })=>{
-        const {data} = await axios("/api/stores?page="+pageParam,{
+        const {data} =await axios("/api/stores?page=" + pageParam,{
             params:{
                 limit: 10,
                 page: pageParam,
