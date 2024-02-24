@@ -34,7 +34,7 @@ export default function StoreBox({store, setStore}:StoreBoxProps){
                     </div>
                 
                     <button type="button" onClick={()=>setStore(null)}><IoClose />
-    </button>
+                    </button>
             </div>
             <div className="mt-4 flex gap-2 items-center">
                     <FiMapPin/>
