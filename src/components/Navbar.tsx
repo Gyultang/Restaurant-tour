@@ -9,7 +9,7 @@ import { IoCloseOutline } from "react-icons/io5";
 export default function Navbar(){
     const [isOpen,setIsOpen]=useState(false)
     const {data, status} = useSession()
-    console.log(status)
+    console.log(data,status)
     return(
        <>
          <div className="navbar">
