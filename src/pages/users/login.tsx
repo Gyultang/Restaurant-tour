@@ -27,15 +27,15 @@ export default function LoginPage(){
             </div>
             <div className="mt-10 mx-auto w-full max-w-sm">
                 <div className="flex flex-col gap-3">
-                    <button type="button" onClick={()=>signIn('google')} className="text-white flex bg-[#4285f4] hover:bg-[#4285f4]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-3">
+                    <button type="button" onClick={()=>signIn('google',{callbackUrl:'/'})} className="text-white flex bg-[#4285f4] hover:bg-[#4285f4]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-3">
                         <FaGoogle className="h-6 w-6"/>
                         Sign in with Google
                     </button>
-                    <button type="button" onClick={()=>signIn('naver')}  className="text-white flex bg-[#2DB400] hover:bg-[#2DB400]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-4">
+                    <button type="button" onClick={()=>signIn('naver',{callbackUrl:'/'})}  className="text-white flex bg-[#2DB400] hover:bg-[#2DB400]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-4">
                         <SiNaver className="h-5 w-5"/>
                         Sign in with Naver
                     </button>
-                    <button type="button" className="text-black flex bg-[#FEE101] hover:bg-[#FEE101]/80 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-4">
+                    <button type="button" onClick={()=>signIn('kakao',{callbackUrl:'/'})}className="text-black flex bg-[#FEE101] hover:bg-[#FEE101]/80 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center gap-4">
                         <RiKakaoTalkFill className="h-7 w-7"/>
                         Sign in with Kakao
                     </button>

@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import NaverProvider from "next-auth/providers/naver";
 import { pages } from "next/dist/build/templates/app-page";
 import { sign } from "crypto";
+import KakaoProvider from "next-auth/providers/kakao";
 
 
 const prisma = new PrismaClient()
@@ -19,6 +20,10 @@ export const authOptions = {
     NaverProvider({
       clientId: process.env.NAVER_CLIENT_ID || '',
       clientSecret: process.env.NAVER_CLIENT_SECRET || '',
+    }),
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID || '',
+      clientSecret: process.env.KAKAO_CLIENT_SECRET || ''
     })
 
     // ...add more providers here
