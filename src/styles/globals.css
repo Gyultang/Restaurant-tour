@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navbar{
-  @apply flex justify-between items-center fixed top-0 w-full h-[52px] shadow-sm bg-white
+  @apply flex justify-between items-center fixed top-0 w-full h-[52px] shadow-sm bg-white z-[100]
 }
 .navbar__logo{
   @apply text-blue-800 text-lg font-semibold cursor-pointer px-[18px] py-0
