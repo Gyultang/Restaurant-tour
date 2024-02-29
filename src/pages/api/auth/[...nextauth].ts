@@ -6,10 +6,16 @@ import NaverProvider from "next-auth/providers/naver";
 import { pages } from "next/dist/build/templates/app-page";
 import { sign } from "crypto";
 import KakaoProvider from "next-auth/providers/kakao";
+import { Session } from "inspector";
 
 
 const prisma = new PrismaClient()
 export const authOptions = {
+  session:{
+    strategy:"jwt" as const, // jwt기반 session을 사용
+    maxAge:60*60*24, // 세션의 최대수명 
+    updateAge:60*60*2 // 세션을 업데이트하는 주기
+  },
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [

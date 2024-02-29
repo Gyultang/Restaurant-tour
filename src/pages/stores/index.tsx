@@ -1,35 +1,40 @@
-import React,{useRef, useEffect, useCallback} from 'react'
-
+import React,{useRef, useEffect, useCallback, useState} from 'react'
 import Image from 'next/image'
 import axios from 'axios'
 import { useQuery, useInfiniteQuery } from 'react-query'
 import Loading from '@/components/Loading'
-import { useRouter } from 'next/router'
 import {StoreApiResponse, StoreType} from "@/interface"
 import Link from 'next/link'
 import Pagination from '@/components/Pagination'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import Loader from '@/components/Loader'
+import SearchFilter from '@/components/SearchFilter'
 
 export default function StoreListPage(){
-    const router = useRouter();
-    const {page = "1"}:any = router.query
     const ref = useRef<HTMLDivElement | null>(null)
     const pageRef = useIntersectionObserver(ref,{})
     const isPageEnd = !!pageRef?.isIntersecting
-    console.log(isPageEnd)
+    const [q, setQ] = useState<string|null>(null)
+    const [district, setDistrict] = useState<string|null>(null)
+  
 
+    const searchParams={
+        q:q,
+        district:district
+    }
+    console.log(searchParams)
     const fetchStores = async({pageParam = 1 })=>{
         const {data} =await axios("/api/stores?page=" + pageParam,{
             params:{
                 limit: 10,
                 page: pageParam,
+                ...searchParams,
             }
         })
         return data
     }
 
-    const {data:stores, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage,isError,isLoading} = useInfiniteQuery('stores', fetchStores, {
+    const {data:stores, isFetching, fetchNextPage, isFetchingNextPage, hasNextPage,isError,isLoading} = useInfiniteQuery(['stores',searchParams], fetchStores, {
         getNextPageParam:(lastPage:any)=> lastPage.data?.length>0? lastPage.page + 1:undefined,
     })
 
@@ -57,6 +62,7 @@ export default function StoreListPage(){
 
     return(
         <div className="px-4 md:max-w-5xl mx-auto py-8">
+            <SearchFilter setQ={setQ} setDistrict={setDistrict}/>
             <ul role="list" className="divide-y divide-gray-100">
                 {isLoading ? (
                 <Loading />
