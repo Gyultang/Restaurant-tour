@@ -7,9 +7,10 @@ import { pages } from "next/dist/build/templates/app-page";
 import { sign } from "crypto";
 import KakaoProvider from "next-auth/providers/kakao";
 import { Session } from "inspector";
+import prisma from "@/db";
 
 
-const prisma = new PrismaClient()
+
 export const authOptions = {
   session:{
     strategy:"jwt" as const, // jwt기반 session을 사용

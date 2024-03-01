@@ -7,16 +7,14 @@ import { CiCircleInfo } from "react-icons/ci";
 import { FaCheck } from "react-icons/fa6";
 import { StoreType } from "@/interface"
 import { useRouter } from "next/router";
+import { useRecoilState} from "recoil";
+import { currentStoreState } from "@/atom";
 
 
 
 
-interface StoreBoxProps{
-    store:StoreType | null;
-    setStore:Dispatch<SetStateAction<any>>;
-}
-
-export default function StoreBox({store, setStore}:StoreBoxProps){
+export default function StoreBox(){
+    const [store,setStore] = useRecoilState(currentStoreState)
     const router = useRouter()
 
 
