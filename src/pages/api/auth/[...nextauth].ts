@@ -8,6 +8,7 @@ import { sign } from "crypto";
 import KakaoProvider from "next-auth/providers/kakao";
 import { Session } from "inspector";
 import prisma from "@/db";
+import { Adapter} from 'next-auth/adapters'
 
 
 
@@ -17,7 +18,7 @@ export const authOptions = {
     maxAge:60*60*24, // 세션의 최대수명 
     updateAge:60*60*2 // 세션을 업데이트하는 주기
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
