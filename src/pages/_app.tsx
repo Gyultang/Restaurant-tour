@@ -13,17 +13,18 @@ import { RecoilRoot } from "recoil";
 const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { session }= pageProps
+  const { session } = pageProps;
 
-  return 
-  <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
-      <SessionProvider session={session}>
+  return (
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={session}>
           <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <ReactQueryDevtools/>
-      </SessionProvider>
-    </QueryClientProvider>
-  </RecoilRoot>
+            <Component {...pageProps} />
+          </Layout>
+          <ReactQueryDevtools />
+        </SessionProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
+  );
 }

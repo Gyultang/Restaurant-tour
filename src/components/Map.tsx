@@ -5,9 +5,9 @@ import Script from "next/script";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { atom } from "recoil";
 
-declare global{
-  interface window{
-    kakao : any;
+declare global {
+  interface Window {
+    kakao: any;
   }
 }
 
