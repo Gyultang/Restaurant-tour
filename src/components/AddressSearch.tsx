@@ -28,7 +28,8 @@ export default function AddressSearch({setValue, register,errors}:AddressProps){
           fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
     
-        setVaule("address",fullAddress)
+        setValue("address",fullAddress)
+        setIsOpen(false)
     };
     return(
         <>

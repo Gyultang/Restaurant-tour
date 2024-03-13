@@ -15,7 +15,6 @@ export default function StoreNewPage() {
     <form className="px-4 md:max-w-4xl mx-auto py-8" onSubmit={handleSubmit(async (data)=>{
       try{
         const result = await axios.post('/api/stores', data);
-  
 
         if(result.status===200){
           // 성공 케이스
@@ -140,7 +139,7 @@ export default function StoreNewPage() {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+        <button type="button" onClick={()=>router.back()} className="text-sm font-semibold leading-6 text-gray-900">
           뒤로가기
         </button>
         <button

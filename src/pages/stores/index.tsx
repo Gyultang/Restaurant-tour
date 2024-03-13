@@ -19,8 +19,7 @@ export default function StoreListPage(){
     const pageRef = useIntersectionObserver(ref,{})
     const isPageEnd = !!pageRef?.isIntersecting
     const searchValue = useRecoilValue(searchState)
- 
-  
+
 
     const searchParams={
         q:searchValue?.q,
