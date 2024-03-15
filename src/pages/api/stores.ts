@@ -4,6 +4,10 @@ import { PrismaClient } from "@prisma/client";
 import prisma from "@/db";
 import axios from "axios";
 
+import { getServerSession } from "next-auth";
+import { AuthOptions } from "next-auth";
+import { authOptions } from "./auth/[...nextauth]";
+
 interface Responsetype{
   page?:string;
   limit?:string;
@@ -17,6 +21,7 @@ export default async function handler(
   res: NextApiResponse<StoreApiResponse | StoreType[] | StoreType | null>
 ) {
   const { page = "",limit="",q,district, id}: Responsetype = req.query;
+  const session = await getServerSession(req, res, authOptions);
   if(req.method==="POST"){
     // 데이터 생성을 처리
     const formData = req.body
@@ -95,7 +100,12 @@ export default async function handler(
         where:{
           // id값이 있다면 가져오고 없다면 where문을 무시하도록 빈괄호를 넣어줌 {}
           id: id? parseInt(id):{}
-        }
+        },
+        include: {
+          likes: {
+            where: session ? { userId: session?.user?.id } : {},
+          },
+        },
       });
   
       return res.status(200).json(id?stores[0]:stores);

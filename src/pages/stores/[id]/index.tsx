@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 import { useSession } from "next-auth/react"
 import Link from "next/link"
+import Like from "@/components/Like"
 
 export default function StoreDetailPage(){
     const router = useRouter()
@@ -32,12 +33,12 @@ export default function StoreDetailPage(){
         }
     }
 
-    const fetchStore = async()=>{
-        const {data} = await axios(`/api/stores?id=${id}`)
-        return data as StoreType
-    }
+    const fetchStore = async () => {
+        const { data } = await axios(`/api/stores?id=${id}`);
+        return data as StoreType;
+      };
 
-    const {data:store,isFetching,isError, isSuccess}=useQuery(`store-${id}`,fetchStore,{
+    const {data:store,isFetching,isError, isSuccess}=useQuery<StoreType>(`store-${id}`,fetchStore,{
         // id값이 없으면 데이터가 fetch가 안되도록 enabled
         enabled:!!id,
         refetchOnWindowFocus: false, 
@@ -58,8 +59,10 @@ export default function StoreDetailPage(){
                         <h3 className="text-base font-semibold leading-7 text-gray-900">{store?.name}</h3>
                         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{store?.address}</p>
                     </div>
-                    {status === 'authenticated'&&(
+                    {status === 'authenticated'&&store&&(
+                        
                         <div className="flex items-center gap-4 px-4 py-3">
+                        {<Like storeId={store.id}/>}
                         <Link className="underline hover:text-gray-400 text-sm" href={`/stores/${store?.id}/edit`}>수정</Link>
                         <button onClick={handleDelete} type="button" className="underline hover:text-gray-400 text-sm">삭제</button>
                         </div>

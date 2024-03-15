@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth,{NextAuthOptions} from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 import GoogleProvider from "next-auth/providers/google";
@@ -12,7 +12,7 @@ import { Adapter} from 'next-auth/adapters'
 
 
 
-export const authOptions = {
+export const authOptions:NextAuthOptions = {
   session:{
     strategy:"jwt" as const, // jwt기반 session을 사용
     maxAge:60*60*24, // 세션의 최대수명 
@@ -38,7 +38,22 @@ export const authOptions = {
   ],
   pages:{
     signIn:"/users/login"
-  }
+  },
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+  },
 }
 export default NextAuth(authOptions)
 
